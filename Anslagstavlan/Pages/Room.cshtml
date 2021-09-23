@@ -1,0 +1,32 @@
+﻿@page
+@model Anslagstavlan.Pages.RoomModel
+@{
+}
+
+<div class="text-center">
+    <h1>@Model.Room.ChatRoomName</h1>
+    <p>Add a message to @Model.Room.ChatRoomName</p>
+
+    <form method="post">
+        <div class="mb-1">
+            <label for="message">Message:</label><br>
+            <input hidden asp-for="@Model.Room.ChatRoomId" />
+            <input type="text" id="message" asp-for="@Model.Message.Message">
+        </div>
+        <div class="mb-2">
+            <input type="submit" />
+        </div>
+    </form>
+
+        @if(Model.Room.Messages != null)
+        {
+            @foreach(var message in Model.Room.Messages)
+            {
+                <p>@message.Message</p>
+            }
+        }
+
+    @*route the id of the current user*@
+    <a asp-page="/Index" asp-route-id="@Model.Room.ChatRoomOwner">Home</a>
+
+</div>

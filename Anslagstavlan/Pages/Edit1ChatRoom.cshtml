@@ -1,0 +1,25 @@
+﻿@page
+@model Anslagstavlan.Pages.Edit1ChatRoomModel
+@{
+}
+
+<div class="text-center">
+    <h1>Select a room to edit</h1>
+</div>
+
+@if (Model.Rooms != null)
+{
+    @foreach (var room in Model.Rooms)
+    {
+        <div class="text-center">
+
+            <form method="post">
+                <p>
+                    @room.ChatRoomName
+                    <button class="btn btn-success" asp-route-id="@room.ChatRoomId" asp-route-userId="@room.ChatRoomOwner" asp-page-handler="Post">Edit</button>
+                </p>
+            </form>
+
+        </div>
+    }
+}

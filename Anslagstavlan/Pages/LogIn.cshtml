@@ -1,0 +1,32 @@
+﻿@page
+@model Anslagstavlan.Pages.LogInModel
+@{
+}
+
+<div class="text-center">
+    <h1>Log in to your account</h1>
+</div>
+
+<div class="text-lg-right">
+    @if (!String.IsNullOrEmpty(Model.Message))
+    {
+        <p class="text-danger">@Model.Message</p>
+
+    }
+    else
+    {
+        
+    }
+</div>
+
+<div class="text-center">
+    <form method="post">
+        <div class="mb-1">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" asp-for="@Model.User.Username">
+        </div>
+        <div class="mb-2">
+            <input type="submit" />
+        </div>
+    </form>
+</div>

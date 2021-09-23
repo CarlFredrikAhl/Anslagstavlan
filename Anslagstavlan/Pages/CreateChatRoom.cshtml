@@ -1,0 +1,16 @@
+﻿@page
+@model Anslagstavlan.Pages.CreateChatRoomModel
+@{
+}
+
+<div class="text-center">
+    <form method="post">
+        <div class="mb-1">
+            <label for="username">Chat room name:</label><br>
+            <input type="text" id="username" asp-for="@Model.ChatRoom.ChatRoomName">
+        </div>
+        <div class="mb-2">
+            <input type="submit" />
+        </div>
+    </form>
+</div>

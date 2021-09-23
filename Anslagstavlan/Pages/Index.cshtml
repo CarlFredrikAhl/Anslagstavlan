@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-lg-right">
+    @if (Model.CurrentUser != null)
+    {
+        <p style="color:dodgerblue">Logged in as "@Model.CurrentUser.Username"</p>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="btn btn-block" asp-page="/CreateChatRoom"
+               asp-route-id="@Model.CurrentUser.ChatUserId">Create chat room</a>
+            <a class="btn btn-block" asp-page="/DeleteChatRoom"
+               asp-route-id="@Model.CurrentUser.ChatUserId">Delete chat room</a>
+            <a class="btn btn-block" asp-page="/Edit1ChatRoom"
+               asp-route-id="@Model.CurrentUser.ChatUserId">Edit chat room</a>
+        </nav>
+    }
+    else
+    {
+        <p>Not logged in</p>
+    }
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Chat rooms: </h1>
+
+        @if(Model.Rooms != null)
+        {
+            @foreach(var room in Model.Rooms)
+            {
+                <p>
+                    <a asp-page="/Room" asp-route-id="@room.ChatRoomId">@room.ChatRoomName</a>
+                </p>
+            }
+        }
+
+</div>
