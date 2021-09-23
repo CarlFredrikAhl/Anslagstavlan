@@ -12,24 +12,34 @@ namespace Anslagstavlan.Pages
 {
     public class IndexModel : PageModel
     {
-            private readonly AppDbContext database;
+        private readonly AppDbContext database;
 
-            public ChatUserModel CurrentUser { get; set; }
-            public List<ChatRoomModel> Rooms { get; set; }
+        public ChatUserModel CurrentUser { get; set; }
+        public List<ChatUserModel> CreatedRoomUser { get; set; }
+        public List<ChatRoomModel> Rooms { get; set; }
 
-            public IndexModel(AppDbContext context)
+        public IndexModel(AppDbContext context)
+        {
+            database = context;
+        }
+
+        public void OnGet(int id)
+        {
+            CurrentUser = database.Users.Where(user => user.ChatUserId == id).FirstOrDefault();
+            CreatedRoomUser = new List<ChatUserModel>();
+
+            if (CurrentUser != null)
             {
-                database = context;
-            }
+                //Change this so that all users can see all rooms created by all users
+                Rooms = database.Rooms.ToList();
 
-            public void OnGet(int id)
-            {
-                CurrentUser = database.Users.Where(user => user.ChatUserId == id).FirstOrDefault();
-            
-                if(CurrentUser != null)
+                foreach (var room in Rooms)
                 {
-                    Rooms = database.Rooms.Where(room => room.ChatRoomOwner == CurrentUser.ChatUserId).ToList();
+                    ChatUserModel user = database.Users.Where(user => user.ChatUserId == room.ChatRoomOwner)
+                        .FirstOrDefault();
+                    CreatedRoomUser.Add(user);
                 }
             }
+        }
     }
 }

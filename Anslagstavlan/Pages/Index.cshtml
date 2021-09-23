@@ -27,14 +27,20 @@
 <div class="text-center">
     <h1 class="display-4">Chat rooms: </h1>
 
-        @if(Model.Rooms != null)
+    @if (Model.Rooms != null)
+    {
+        @foreach (var room in Model.Rooms)
         {
-            @foreach(var room in Model.Rooms)
+            @foreach (var user in Model.CreatedRoomUser)
             {
-                <p>
-                    <a asp-page="/Room" asp-route-id="@room.ChatRoomId">@room.ChatRoomName</a>
-                </p>
+                @if (user.ChatUserId == room.ChatRoomOwner)
+                {
+                    <p>
+                        <a asp-page="/Room" asp-route-id="@room.ChatRoomId">@room.ChatRoomName (created by @user.Username)</a>
+                    </p>
+                }
             }
         }
+    }
 
 </div>
