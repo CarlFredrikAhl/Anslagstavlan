@@ -23,8 +23,10 @@
         </div>
     </form>
 
-    @if(Model.Room.Img != null)
+    @if (Model.Room.Img != null)
     {
-        <img src="~/imgs/@Model.Room.Img" style="max-width:50px" />
+        <div style="position:fixed;top:150px;right:200px">
+            <img src="~/imgs/@Model.Room.Img" style="max-width:200px" />
+        </div>
     }
 </div>

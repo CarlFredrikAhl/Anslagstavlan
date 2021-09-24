@@ -11,7 +11,7 @@
         <div class="mb-1">
             <label for="message">Message:</label><br>
             <input hidden asp-for="@Model.Room.ChatRoomId" />
-            <input hidden asp-for="@Model.CreatedRoomUser"/>
+            <input hidden asp-for="@Model.CreatedRoomUser" />
             <input required type="text" id="message" asp-for="@Model.Message.Message">
         </div>
         <div class="mb-2">
@@ -34,7 +34,13 @@
         }
     }
 
+    @if (Model.Room.Img != null)
+    {
+        <div style="position:fixed;top:150px;right:200px">
+            <img src="~/imgs/@Model.Room.Img" style="max-width:200px" />
+        </div>
+    }
+
     @*route the id of the current user*@
     <a asp-page="/Index" asp-route-id="@Model.Room.ChatRoomOwner">Home</a>
-
 </div>
