@@ -7,7 +7,14 @@
 <div class="text-lg-right">
     @if (Model.CurrentUser != null)
     {
-        <p style="color:dodgerblue">Logged in as "@Model.CurrentUser.Username"</p>
+        <p style="color:dodgerblue">
+            Logged in as "@Model.CurrentUser.Username"
+
+            @if (Model.CurrentUser.Img != null)
+            {
+            <img src="~/imgs/@Model.CurrentUser.Img" style="max-width:50px" />
+            }
+        </p>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="btn btn-block" asp-page="/CreateChatRoom"
@@ -36,7 +43,16 @@
                 @if (user.ChatUserId == room.ChatRoomOwner)
                 {
                     <p>
-                        <a asp-page="/Room" asp-route-id="@room.ChatRoomId" asp-route-userId="@Model.CurrentUser.ChatUserId">@room.ChatRoomName (created by "@user.Username")</a>
+                        <a asp-page="/Room" asp-route-id="@room.ChatRoomId"
+                           asp-route-userId="@Model.CurrentUser.ChatUserId">
+                            @room.ChatRoomName
+                        (created by "@user.Username"
+                        @if (user.Img != null)
+                        {
+                            <img src="~/imgs/@user.Img" style="max-width:30px" />
+                        }
+                        )
+                        </a>
 
                         @if (room.Img != null)
                         {

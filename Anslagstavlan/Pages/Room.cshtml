@@ -27,7 +27,16 @@
             {
                 @if (user.ChatUserId == message.ChatUserId)
                 {
-                    <p>@message.Message (posted by "@user.Username" at @message.Date)</p>
+                    <p>
+                        @message.Message (posted by "@user.Username"
+
+                        @if (user.Img != null)
+                        {
+                            <img src="~/imgs/@user.Img" style="max-width:30px" />
+                        }
+                        
+                        at @message.Date)
+                    </p>
                     break;
                 }
             }
@@ -41,6 +50,4 @@
         </div>
     }
 
-    @*route the id of the current user*@
-    <a asp-page="/Index" asp-route-id="@Model.Room.ChatRoomOwner">Home</a>
 </div>

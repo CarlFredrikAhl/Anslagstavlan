@@ -13,7 +13,6 @@ namespace Anslagstavlan.Models
         public int ChatRoomOwner { get; set; } // A ChatUserModel id
         public string ChatRoomName { get; set; }
         public List<ChatMessageModel> Messages { get; set; }
-
         public string Img { get; set; }
     }
 }

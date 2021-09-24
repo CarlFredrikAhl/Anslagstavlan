@@ -11,8 +11,7 @@ namespace Anslagstavlan.Models
         [Key]
         public int ChatUserId { get; set; }
         public string Username { get; set; }
-
-        //Before trying to add profile picture to user
+        public string Img { get; set; }
     }
 
 }
