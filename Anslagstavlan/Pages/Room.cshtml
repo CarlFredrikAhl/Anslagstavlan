@@ -28,6 +28,7 @@
                 @if (user.ChatUserId == message.ChatUserId)
                 {
                     <p>@message.Message (posted by "@user.Username" at @message.Date)</p>
+                    break;
                 }
             }
         }
