@@ -16,7 +16,12 @@
             <form method="post">
                 <p>
                     @room.ChatRoomName
-                    <button class="btn btn-success" asp-route-id="@room.ChatRoomId" asp-route-userId="@room.ChatRoomOwner" asp-page-handler="Post">Edit</button>
+                    <button class="btn btn-success" asp-route-id="@room.ChatRoomId" asp-route-userId="@room.ChatRoomOwner" 
+                            asp-page-handler="Post">Edit</button>
+                    @if (room.Img != null)
+                    {
+                        <img src="~/imgs/@room.Img" style="max-width:50px" />
+                    }
                 </p>
             </form>
 

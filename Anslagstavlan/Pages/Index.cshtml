@@ -37,6 +37,11 @@
                 {
                     <p>
                         <a asp-page="/Room" asp-route-id="@room.ChatRoomId" asp-route-userId="@Model.CurrentUser.ChatUserId">@room.ChatRoomName (created by "@user.Username")</a>
+
+                        @if (room.Img != null)
+                        {
+                            <img src="~/imgs/@room.Img" style="max-width:50px" />
+                        }
                     </p>
                     break;
                 }

@@ -17,6 +17,11 @@
                 <p>
                     @room.ChatRoomName
                     <button class="btn btn-danger" asp-route-id="@room.ChatRoomId" asp-page-handler="Post">Delete</button>
+
+                    @if (room.Img != null)
+                    {
+                        <img src="~/imgs/@room.Img" style="max-width:50px" />
+                    }
                 </p>
             </form>
 

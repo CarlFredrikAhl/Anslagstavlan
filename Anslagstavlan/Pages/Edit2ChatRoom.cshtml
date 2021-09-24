@@ -6,15 +6,25 @@
 <div class="text-center">
     <h1 class="display-4">Edit room</h1>
 
-    <form method="post" asp-page-handler="Edit">
+    <form method="post" asp-page-handler="Edit" enctype="multipart/form-data">
         <input hidden asp-for="@Model.Room.ChatRoomId" />
         <input hidden asp-for="@Model.Room.ChatRoomOwner" />
+        <input hidden asp-for="@Model.Room.Img" />
         <div class="mb-1">
             <label for="name">Name:</label><br>
             <input required type="text" id="name" asp-for="@Model.Room.ChatRoomName" placeholder="@Model.Room.ChatRoomName">
+        </div>
+        <div class="mb-1">
+            <label for="img">Upload image:</label> <br>
+            <input type="file" id="img" asp-for="@Model.Image" />
         </div>
         <div class="mb-2">
             <input type="submit" />
         </div>
     </form>
+
+    @if(Model.Room.Img != null)
+    {
+        <img src="~/imgs/@Model.Room.Img" style="max-width:50px" />
+    }
 </div>

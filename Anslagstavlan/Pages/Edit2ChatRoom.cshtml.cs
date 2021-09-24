@@ -6,19 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Anslagstavlan.Models;
 using Anslagstavlan.Database;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Anslagstavlan.Pages
 {
     public class Edit2ChatRoomModel : PageModel
     {
         private readonly AppDbContext database;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         [BindProperty]
         public ChatRoomModel Room { get; set; }
 
-        public Edit2ChatRoomModel(AppDbContext context)
+        [BindProperty]
+        public IFormFile Image { get; set; }
+
+        public Edit2ChatRoomModel(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             database = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public void OnGet(int id, int userId)
@@ -29,6 +37,29 @@ namespace Anslagstavlan.Pages
 
         public IActionResult OnPostEdit()
         {
+            if (Image != null)
+            {
+                string folder = Path.Combine(webHostEnvironment.WebRootPath, "imgs");
+
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+
+                string ext = Path.GetExtension(Image.FileName);
+
+                string uniqueFileName = String.Concat(Guid.NewGuid().ToString(), "-", Room.ChatRoomName + ext);
+
+                string uploadFolder = Path.Combine(folder, uniqueFileName);
+
+                using (var fileStream = new FileStream(uploadFolder, FileMode.Create))
+                {
+                    Image.CopyTo(fileStream);
+                }
+
+                Room.Img = uniqueFileName;
+            } 
+
             //Edit the room
             database.Update(Room);
             database.SaveChanges();
