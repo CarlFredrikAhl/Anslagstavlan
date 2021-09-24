@@ -4,10 +4,14 @@
 }
 
 <div class="text-center">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="mb-1">
             <label for="username">Chat room name:</label><br>
             <input required type="text" id="username" asp-for="@Model.ChatRoom.ChatRoomName">
+        </div>
+        <div class="mb-1">
+            <label for="img">Upload image:</label> <br>
+            <input type="file" id="img" asp-for="@Model.Image" />
         </div>
         <div class="mb-2">
             <input type="submit" />

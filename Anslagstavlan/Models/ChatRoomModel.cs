@@ -14,6 +14,6 @@ namespace Anslagstavlan.Models
         public string ChatRoomName { get; set; }
         public List<ChatMessageModel> Messages { get; set; }
 
-        //public string Img { get; set; }
+        public string Img { get; set; }
     }
 }
