@@ -15,7 +15,7 @@ namespace Anslagstavlan.Pages
         private readonly AppDbContext database;
 
         public ChatUserModel CurrentUser { get; set; }
-        public List<ChatUserModel> CreatedRoomUser { get; set; }
+        public List<ChatUserModel> CreatedRoomUsers { get; set; }
         public List<ChatRoomModel> Rooms { get; set; }
 
         public IndexModel(AppDbContext context)
@@ -26,7 +26,7 @@ namespace Anslagstavlan.Pages
         public void OnGet(int id)
         {
             CurrentUser = database.Users.Where(user => user.ChatUserId == id).FirstOrDefault();
-            CreatedRoomUser = new List<ChatUserModel>();
+            CreatedRoomUsers = new List<ChatUserModel>();
 
             if (CurrentUser != null)
             {
@@ -37,7 +37,7 @@ namespace Anslagstavlan.Pages
                 {
                     ChatUserModel user = database.Users.Where(user => user.ChatUserId == room.ChatRoomOwner)
                         .FirstOrDefault();
-                    CreatedRoomUser.Add(user);
+                    CreatedRoomUsers.Add(user);
                 }
             }
         }

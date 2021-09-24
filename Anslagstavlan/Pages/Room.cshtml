@@ -4,13 +4,14 @@
 }
 
 <div class="text-center">
-    <h1>@Model.Room.ChatRoomName</h1>
+    <h1>@Model.Room.ChatRoomName (created by "@Model.CreatedRoomUser.Username")</h1>
     <p>Add a message to @Model.Room.ChatRoomName</p>
 
     <form method="post">
         <div class="mb-1">
             <label for="message">Message:</label><br>
             <input hidden asp-for="@Model.Room.ChatRoomId" />
+            <input hidden asp-for="@Model.CreatedRoomUser"/>
             <input type="text" id="message" asp-for="@Model.Message.Message">
         </div>
         <div class="mb-2">
@@ -18,13 +19,19 @@
         </div>
     </form>
 
-        @if(Model.Room.Messages != null)
+    @if (Model.Room.Messages != null)
+    {
+        @foreach (var message in Model.Room.Messages)
         {
-            @foreach(var message in Model.Room.Messages)
+            @foreach (var user in Model.CreatedMessageUsers)
             {
-                <p>@message.Message</p>
+                @if (user.ChatUserId == message.ChatUserId)
+                {
+                    <p>@message.Message (posted by "@user.Username" at @message.Date)</p>
+                }
             }
         }
+    }
 
     @*route the id of the current user*@
     <a asp-page="/Index" asp-route-id="@Model.Room.ChatRoomOwner">Home</a>
