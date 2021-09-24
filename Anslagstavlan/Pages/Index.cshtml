@@ -38,6 +38,7 @@
                     <p>
                         <a asp-page="/Room" asp-route-id="@room.ChatRoomId" asp-route-userId="@Model.CurrentUser.ChatUserId">@room.ChatRoomName (created by "@user.Username")</a>
                     </p>
+                    break;
                 }
             }
         }

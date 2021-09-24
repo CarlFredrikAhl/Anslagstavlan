@@ -11,7 +11,7 @@
         <input hidden asp-for="@Model.Room.ChatRoomOwner" />
         <div class="mb-1">
             <label for="name">Name:</label><br>
-            <input type="text" id="name" asp-for="@Model.Room.ChatRoomName" placeholder="@Model.Room.ChatRoomName">
+            <input required type="text" id="name" asp-for="@Model.Room.ChatRoomName" placeholder="@Model.Room.ChatRoomName">
         </div>
         <div class="mb-2">
             <input type="submit" />
